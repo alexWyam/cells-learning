@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04-01 — JSDoc</title>
+    <style>
+      body { font-family: system-ui, sans-serif; padding: 2rem; font-size: 0.9rem; }
+      pre { background: #f5f5f5; padding: 1rem; border-radius: 4px; overflow-x: auto; }
+    </style>
+  </head>
+  <body>
+    <h1>JSDoc — Tipado sin TypeScript</h1>
+    <p>Abre la consola del navegador para ver los resultados de las funciones tipadas.</p>
+
+    <h2>Resultado</h2>
+    <pre id="output">Cargando...</pre>
+
+    <script type="module">
+      import { formatName, getInitials, groupBy } from './utils.js';
+
+      const users = [
+        { id: '1', name: 'ada lovelace', role: 'admin' },
+        { id: '2', name: 'grace hopper', role: 'viewer' },
+        { id: '3', name: 'margaret hamilton', role: 'admin' },
+      ];
+
+      const grouped = groupBy(users, (u) => u.role);
+
+      document.querySelector('#output').textContent = JSON.stringify(
+        {
+          formattedName: formatName('ada lovelace'),
+          initials: getInitials('Ada Lovelace'),
+          groupedByRole: grouped,
+        },
+        null,
+        2
+      );
+    </script>
+  </body>
+</html>

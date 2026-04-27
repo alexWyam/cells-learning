@@ -1,0 +1,12 @@
+/* Design tokens globales — accesibles desde cualquier Shadow DOM via var() */
+:root {
+  --ds-color-primary: #6c63ff;
+  --ds-color-danger: #e53935;
+  --ds-color-secondary: #546e7a;
+  --ds-color-bg: #ffffff;
+  --ds-color-text: #212121;
+  --ds-color-border: #e0e0e0;
+  --ds-radius: 6px;
+  --ds-spacing: 0.75rem;
+  --ds-font-size: 0.9rem;
+}

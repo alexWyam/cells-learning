@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02-04 — Estilos</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "lit": "https://esm.run/lit@3",
+          "lit/": "https://esm.run/lit@3/"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="./ds-tokens.css" />
+    <style>
+      body { font-family: system-ui, sans-serif; padding: 2rem; }
+      .dark { background: #1a1a2e; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; }
+      .dark { --ds-color-primary: #bb86fc; --ds-color-bg: #16213e; --ds-color-text: #e0e0e0; }
+    </style>
+  </head>
+  <body>
+    <h1>Estilos en LitElement</h1>
+
+    <h2>Tema claro (por defecto)</h2>
+    <ds-button>Default</ds-button>
+    <ds-button variant="primary">Primary</ds-button>
+    <ds-button variant="danger">Danger</ds-button>
+    <ds-button disabled>Disabled</ds-button>
+
+    <ds-card>
+      <span slot="header">Tarjeta de ejemplo</span>
+      <p slot="body">Contenido de la tarjeta con estilos del design system.</p>
+      <ds-button slot="footer" variant="primary">Acción</ds-button>
+    </ds-card>
+
+    <div class="dark">
+      <h2 style="color: #e0e0e0">Tema oscuro (variables CSS)</h2>
+      <ds-button variant="primary">Primary Dark</ds-button>
+      <ds-card>
+        <span slot="header">Tarjeta oscura</span>
+        <p slot="body">Las variables CSS atraviesan el Shadow DOM.</p>
+      </ds-card>
+    </div>
+
+    <script type="module" src="./ds-button.js"></script>
+    <script type="module" src="./ds-card.js"></script>
+  </body>
+</html>

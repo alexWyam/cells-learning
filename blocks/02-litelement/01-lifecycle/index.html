@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02-01 — LitElement Lifecycle</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "lit": "https://esm.run/lit@3",
+          "lit/": "https://esm.run/lit@3/"
+        }
+      }
+    </script>
+    <style>
+      body { font-family: system-ui, sans-serif; padding: 2rem; }
+    </style>
+  </head>
+  <body>
+    <h1>LitElement — Ciclo de vida</h1>
+
+    <div id="controls">
+      <button id="btn-remove">Eliminar del DOM</button>
+      <button id="btn-insert">Insertar en el DOM</button>
+    </div>
+    <div id="container">
+      <lifecycle-demo></lifecycle-demo>
+    </div>
+
+    <script type="module" src="./lifecycle-demo.js"></script>
+    <script type="module">
+      const container = document.querySelector('#container');
+      let el = container.querySelector('lifecycle-demo');
+
+      document.querySelector('#btn-remove').addEventListener('click', () => {
+        el = container.querySelector('lifecycle-demo');
+        if (el) container.removeChild(el);
+      });
+
+      document.querySelector('#btn-insert').addEventListener('click', () => {
+        if (!container.querySelector('lifecycle-demo')) {
+          container.appendChild(el);
+        }
+      });
+    </script>
+  </body>
+</html>

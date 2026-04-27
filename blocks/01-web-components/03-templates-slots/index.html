@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03 — Templates y Slots</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Templates y Slots</h1>
+
+    <!--
+      El Light DOM (contenido entre las etiquetas) se proyecta
+      mediante los slots definidos en el Shadow DOM del componente.
+    -->
+    <card-layout>
+      <span slot="header">Título de la tarjeta</span>
+      <p slot="body">Contenido principal del cuerpo de la tarjeta.</p>
+      <button slot="footer">Acción</button>
+    </card-layout>
+
+    <card-layout>
+      <span slot="header">Segunda tarjeta</span>
+      <p slot="body">Otro contenido diferente.</p>
+    </card-layout>
+
+    <script type="module" src="./card-layout.js"></script>
+  </body>
+</html>

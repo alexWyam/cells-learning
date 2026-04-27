@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "strict": true,
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "bundler"
+  },
+  "include": ["./**/*.js"],
+  "exclude": ["node_modules"]
+}

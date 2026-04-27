@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04 — ES Modules</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 2rem;
+      }
+    </style>
+
+    <!--
+      Import map: permite usar bare specifiers en el navegador sin bundler.
+      'lit' se resuelve a la URL del CDN en lugar de /node_modules.
+    -->
+    <script type="importmap">
+      {
+        "imports": {
+          "lit": "https://esm.run/lit@3",
+          "lit/": "https://esm.run/lit@3/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>ES Modules</h1>
+
+    <user-card name="Ada Lovelace" role="Engineer"></user-card>
+
+    <button id="load-more">Cargar componente dinámicamente</button>
+    <div id="dynamic-container"></div>
+
+    <script type="module" src="./user-card.js"></script>
+    <script type="module">
+      // TODO: implementar import() dinámico al hacer click en el botón
+      document.querySelector('#load-more').addEventListener('click', async () => {
+        // const { default: MyComponent } = await import('./otro-componente.js');
+      });
+    </script>
+  </body>
+</html>

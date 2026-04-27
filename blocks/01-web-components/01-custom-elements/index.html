@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01 — Custom Elements</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Custom Elements</h1>
+
+    <user-card name="Ada Lovelace" role="Engineer"></user-card>
+    <user-card name="Grace Hopper" role="Admiral"></user-card>
+
+    <script>
+      document.addEventListener('user-contact', (e) => {
+        console.info('user-contact event:', e.detail);
+      });
+    </script>
+
+    <script type="module" src="./user-card.js"></script>
+  </body>
+</html>

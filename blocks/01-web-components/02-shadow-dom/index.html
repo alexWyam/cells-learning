@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02 — Shadow DOM</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 2rem;
+        /* Estos estilos NO deben afectar al interior del Shadow DOM */
+        color: red;
+        font-size: 32px;
+      }
+
+      /* Variable CSS: sí puede entrar en el Shadow DOM */
+      :root {
+        --card-background: #f0f4ff;
+        --card-color: #1a237e;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Shadow DOM</h1>
+    <p>El texto rojo de 32px NO debe afectar al interior del componente.</p>
+
+    <user-card-shadow name="Ada Lovelace" role="Engineer"></user-card-shadow>
+
+    <script type="module" src="./user-card-shadow.js"></script>
+  </body>
+</html>
