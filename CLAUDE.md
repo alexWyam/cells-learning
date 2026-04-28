@@ -2,13 +2,13 @@
 
 ## Contexto del desarrollador
 
-Senior Frontend Developer, +10 años de experiencia. Stack principal: Angular, TypeScript, SASS.
-Aprendizaje activo del stack Cells / LitElement / Web Components de BBVA.
+Senior Frontend Developer, +10 años de experiencia. Stack principal: Angular, TypeScript, SASS, RxJS.
+Aprendizaje activo del stack Open Cells / LitElement / Web Components de BBVA.
 Objetivo: incorporarse como desarrollador productivo en un equipo Mobile Cells.
 
 ## Propósito del repositorio
 
-Aprendizaje progresivo y estructurado del stack Cells / Open Cells (BBVA).
+Aprendizaje progresivo y estructurado del stack Open Cells (BBVA).
 Organizado en bloques, partiendo de los estándares web nativos hasta la arquitectura completa de Cells.
 Todo el código es de práctica — no hay entorno de producción.
 
@@ -18,20 +18,23 @@ Todo el código es de práctica — no hay entorno de producción.
 - **Shell**: ZSH (iTerm2). No usar sintaxis exclusiva de bash en scripts
 - **IDE**: VSCode con extensión Claude Code
 - **Lenguaje**: JavaScript ES2020+ (ES Modules). Sin TypeScript salvo indicación explícita
+- La documentación oficial de Open Cells usa TypeScript — traducir siempre a JS en los ejemplos
 - No hay backend real. Los ejercicios son autocontenidos o usan mocks locales
 
 ## Stack
 
-| Capa | Tecnología |
-|---|---|
-| Web Components | Custom Elements · Shadow DOM · HTML Templates · ES Modules |
-| Componentes | LitElement |
-| Framework | Cells / Open Cells (BBVA) |
-| Estado | Pub-sub reactivo con RxJS |
-| CLI | cells-cli |
-| Testing | Vitest |
-| Linting | ESLint (flat config) |
-| Formatter | Prettier |
+| Capa               | Tecnología                                                  |
+| ------------------ | ----------------------------------------------------------- |
+| Web Components     | Custom Elements · Shadow DOM · HTML Templates · ES Modules  |
+| Componentes        | LitElement                                                  |
+| Framework          | Open Cells (BBVA) — https://www.opencells.dev               |
+| Estado             | Canales pub-sub de Open Cells sobre RxJS (`PageController`) |
+| Scaffold           | `npm init @open-cells/app`                                  |
+| Build / Dev server | Vite (`npm run dev` / `npm run build`)                      |
+| CLI interno BBVA   | `cells-cli` — pendiente de confirmar con el equipo real     |
+| Testing            | Vitest                                                      |
+| Linting            | ESLint (flat config)                                        |
+| Formatter          | Prettier                                                    |
 
 ## Estructura del repositorio
 
@@ -60,10 +63,11 @@ cells-learning/
 │   │   └── 05-events/
 │   ├── 03-cells-architecture/
 │   │   ├── README.md
-│   │   ├── 01-router/
-│   │   ├── 02-state-pubsub/
-│   │   ├── 03-project-structure/
-│   │   └── 04-cells-cli/
+│   │   ├── 01-app-scaffold/        ← npm init @open-cells/app
+│   │   ├── 02-router/              ← startApp + routes.js
+│   │   ├── 03-page-controller/     ← navigate, onPageEnter, onPageLeave
+│   │   ├── 04-channels/            ← publish / subscribe / unsubscribe
+│   │   └── 05-build/               ← npm run dev / build (Vite)
 │   ├── 04-js-without-ts/
 │   │   ├── README.md
 │   │   ├── 01-jsdoc/
@@ -95,6 +99,15 @@ cells-learning/
 - Propiedades hacia abajo, eventos hacia arriba. Sin comunicación directa entre componentes hermanos.
 - En LitElement: propiedades reactivas declaradas en `static properties`. Sin acceso directo al DOM salvo con `this.renderRoot.querySelector`.
 
+### Open Cells
+
+- El punto de entrada de la app es `startApp({ routes, mainNode })` desde `@open-cells/core`.
+- Cada ruta mapea un path a un componente página con lazy import.
+- Siempre debe existir una ruta raíz `/`.
+- La comunicación entre páginas se hace mediante canales: `pageController.publish('ch-nombre', data)` / `pageController.subscribe('ch-nombre', cb)`.
+- Suscribirse en `onPageEnter`, desuscribirse en `onPageLeave` — equivalente a `ngOnInit` / `ngOnDestroy`.
+- Prefijo `ch-` en los nombres de canal para identificarlos claramente.
+
 ### Estilos
 
 - Estilos dentro del componente via `static styles = css\`...\`` en LitElement.
@@ -105,6 +118,7 @@ cells-learning/
 ### Estructura de cada ejercicio
 
 Cada ejercicio vive en su propia carpeta con:
+
 - `index.html` — punto de entrada ejecutable directamente en el navegador o con servidor local mínimo
 - `README.md` — enunciado, objetivo y referencia a conceptos de Angular equivalentes si aplica
 - Archivos `.js` del ejercicio
@@ -185,6 +199,7 @@ npm run test:ci     # Vitest con cobertura
 - Ante ambigüedad en un requisito, preguntar antes de asumir.
 - Si se detecta deuda técnica o mejora posible, anotarla como `// TODO:` con descripción.
 - Comparar con Angular cuando el contexto lo haga útil para el aprendizaje.
+- La documentación oficial de Open Cells usa TypeScript — traducir siempre a JS salvo indicación explícita.
 
 ---
 
@@ -192,23 +207,28 @@ npm run test:ci     # Vitest con cobertura
 
 ```bash
 # Entorno
-nvm use                  # Activar versión de Node del .nvmrc
+nvm use                    # Activar versión de Node del .nvmrc
 
-# Desarrollo
-npx serve .              # Servidor estático local (bloques 1-2)
-cells serve              # Servidor Cells (bloque 3 en adelante)
+# Desarrollo (bloques 1-2, sin framework)
+npx serve .                # Servidor estático local
+
+# Open Cells (bloque 3 en adelante)
+npm init @open-cells/app   # Scaffold de nueva aplicación
+npm install                # Instalar dependencias
+npm run dev                # Dev server con Vite
+npm run build              # Build de producción con Vite
 
 # Calidad
-npm run lint             # ESLint
-npm run lint:fix         # ESLint con autofix
-npm run format           # Prettier
-npm run test             # Vitest watch
-npm run test:ci          # Vitest + cobertura
+npm run lint               # ESLint
+npm run lint:fix           # ESLint con autofix
+npm run format             # Prettier
+npm run test               # Vitest watch
+npm run test:ci            # Vitest + cobertura
 
-# cells-cli (bloque 3)
-cells new <app>          # Scaffold de aplicación Cells
-cells generate <comp>    # Scaffold de componente
-cells build              # Build de producción
+# cells-cli (pendiente de confirmar con el equipo real)
+# cells new <app>          # Scaffold de aplicación
+# cells generate <comp>    # Scaffold de componente
+# cells build              # Build de producción
 ```
 
 ---
@@ -218,9 +238,18 @@ cells build              # Build de producción
 - `var` en cualquier contexto.
 - `require()` — usar siempre ES Modules.
 - Manipulación directa del DOM fuera del Shadow DOM del componente.
-- Comunicación directa entre componentes hermanos (usar eventos o pub-sub).
+- Comunicación directa entre componentes hermanos (usar canales pub-sub de Open Cells).
 - Estilos globales que afecten al interior de un Shadow DOM.
 - Acceder a propiedades internas de otro componente desde fuera.
+- Suscribirse a canales sin desuscribirse en `onPageLeave` — provoca memory leaks.
 - Tests que solo verifican que algo no rompe sin aserción real.
 - Commits con múltiples cambios no relacionados mezclados.
 - `console.log` en código que no sea depuración temporal.
+
+---
+
+## Fuentes de referencia
+
+- Documentación oficial Open Cells: https://www.opencells.dev/docs/index.html
+- Repositorio GitHub Open Cells: https://github.com/BBVA/open-cells
+- LitElement: https://lit.dev
