@@ -1,22 +1,45 @@
 class UserCard extends HTMLElement {
-  // TODO: declarar los atributos que queremos observar
-  static get observedAttributes() {
-    return [];
+  constructor() {
+    super();
+    this._name = '';
+    this._role = '';
   }
 
-  // TODO: se ejecuta cuando el elemento entra en el DOM
-  connectedCallback() {}
+  static get observedAttributes() {
+    return ['name', 'role'];
+  }
 
-  // TODO: se ejecuta cuando cambia uno de los atributos observados
-  attributeChangedCallback(_name, _oldValue, _newValue) {}
+  connectedCallback() {
+    this.render();
+  }
 
-  // TODO: se ejecuta cuando el elemento sale del DOM (limpiar listeners)
+  attributeChangedCallback(_data, _oldValue, _newValue) {
+    if (_data === 'name') {
+      this._name = _newValue;
+    } else if (_data === 'role') {
+      this._role = _newValue;
+    }
+    if (this.isConnected) this.render();
+  }
+
   disconnectedCallback() {}
 
   render() {
-    // TODO: leer atributos con this.getAttribute(...)
-    // TODO: actualizar this.innerHTML con el template del card
-    // TODO: añadir listener al botón que emita CustomEvent('user-contact', ...)
+    this.innerHTML = `
+    <p>Name: ${this._name}</p>
+    <p>Role: ${this._role}</p>
+    <button id="contact-btn">Contact</button>
+    `;
+
+    this.querySelector('#contact-btn').addEventListener('click', () => {
+      this.dispatchEvent(
+        new CustomEvent('user-contact', {
+          detail: { name: this._name, role: this._role },
+          bubbles: true,
+          composed: true,
+        })
+      );
+    });
   }
 }
 
