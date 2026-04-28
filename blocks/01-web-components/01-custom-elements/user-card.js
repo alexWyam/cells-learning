@@ -10,6 +10,7 @@ class UserCard extends HTMLElement {
   }
 
   connectedCallback() {
+    this.addEventListener('click', this._handleClick);
     this.render();
   }
 
@@ -22,16 +23,12 @@ class UserCard extends HTMLElement {
     if (this.isConnected) this.render();
   }
 
-  disconnectedCallback() {}
+  disconnectedCallback() {
+    this.removeEventListener('click', this._handleClick);
+  }
 
-  render() {
-    this.innerHTML = `
-    <p>Name: ${this._name}</p>
-    <p>Role: ${this._role}</p>
-    <button id="contact-btn">Contact</button>
-    `;
-
-    this.querySelector('#contact-btn').addEventListener('click', () => {
+  _handleClick = (e) => {
+    if (e.target.closest('#contact-btn')) {
       this.dispatchEvent(
         new CustomEvent('user-contact', {
           detail: { name: this._name, role: this._role },
@@ -39,7 +36,15 @@ class UserCard extends HTMLElement {
           composed: true,
         })
       );
-    });
+    }
+  };
+
+  render() {
+    this.innerHTML = `
+    <p>Name: ${this._name}</p>
+    <p>Role: ${this._role}</p>
+    <button id="contact-btn">Contact</button>
+    `;
   }
 }
 
