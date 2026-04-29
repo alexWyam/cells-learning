@@ -1,4 +1,3 @@
-// TODO: importar formatName y getInitials desde './utils.js'
 import { formatName, getInitials } from './utils.js';
 
 class UserCard extends HTMLElement {
@@ -19,7 +18,6 @@ class UserCard extends HTMLElement {
     const name = this.getAttribute('name') ?? '';
     const role = this.getAttribute('role') ?? '';
 
-    // TODO: usar formatName y getInitials en el template
     this.shadowRoot.innerHTML = `
       <style>
         :host { display: block; }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -34,9 +34,10 @@
 
     <script type="module" src="./user-card.js"></script>
     <script type="module">
-      // TODO: implementar import() dinámico al hacer click en el botón
       document.querySelector('#load-more').addEventListener('click', async () => {
-        // const { default: MyComponent } = await import('./otro-componente.js');
+        await import('./user-badge.js');
+        const badge = document.createElement('user-badge');
+        document.querySelector('#dynamic-container').appendChild(badge);
       });
     </script>
   </body>
