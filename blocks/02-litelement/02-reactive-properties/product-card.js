@@ -1,7 +1,6 @@
 import { LitElement, html, css } from 'lit';
 
 class ProductCard extends LitElement {
-  // TODO: declarar las propiedades reactivas
   static properties = {
     name: { type: String },
     price: { type: Number },
@@ -11,15 +10,48 @@ class ProductCard extends LitElement {
   };
 
   static styles = css`
-    :host { display: block; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin: 0.5rem 0; max-width: 320px; }
-    :host([in-stock]) { border-color: #4caf50; }
-    .price { font-size: 1.25rem; font-weight: bold; }
-    .stock { font-size: 0.8rem; }
-    :host([in-stock]) .stock { color: #4caf50; }
-    .stock:not([in-stock]) { color: #f44336; }
-    .tags { display: flex; gap: 0.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
-    .tag { padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.75rem; background: #eee; cursor: pointer; border: none; }
-    .tag.selected { background: #6c63ff; color: #fff; }
+    :host {
+      display: block;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      max-width: 320px;
+    }
+    :host([in-stock]) {
+      border-color: #4caf50;
+    }
+    .price {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+    .stock {
+      font-size: 0.8rem;
+    }
+    :host([in-stock]) .stock {
+      color: #4caf50;
+    }
+    .stock:not([in-stock]) {
+      color: #f44336;
+    }
+    .tags {
+      display: flex;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .tag {
+      padding: 0.15rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      background: #eee;
+      cursor: pointer;
+      border: none;
+    }
+    .tag.selected {
+      background: #6c63ff;
+      color: #fff;
+    }
   `;
 
   constructor() {
@@ -46,7 +78,7 @@ class ProductCard extends LitElement {
           `
         )}
       </div>
-      ${this._selectedTag ? html`<p>Tag seleccionado: <em>${this._selectedTag}</em></p>` : ''}
+      <p class="tag-label">${this._selectedTag ? html`Tag seleccionado: <em>${this._selectedTag}</em>` : ''}</p>
     `;
   }
 }
