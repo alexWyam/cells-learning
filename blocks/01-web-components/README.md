@@ -10,12 +10,12 @@ LitElement compila directamente sobre estos estándares. Entenderlos elimina la 
 
 ## Ejercicios
 
-| Carpeta | Concepto clave | Paralelo Angular |
-|---|---|---|
-| `01-custom-elements/` | Ciclo de vida del elemento, atributos observados | `@Component`, `ngOnInit`, `ngOnChanges` |
-| `02-shadow-dom/` | Encapsulación de estilos y árbol DOM | `ViewEncapsulation.ShadowDom` |
-| `03-templates-slots/` | `<template>`, `<slot>` y proyección de contenido | `ng-content`, `ng-template` |
-| `04-es-modules/` | `import`/`export` nativos del navegador | Módulos Angular (`NgModule`) |
+| Carpeta | Concepto clave | Paralelo Angular (clásico) | Angular v17+ |
+|---|---|---|---|
+| `01-custom-elements/` | Ciclo de vida del elemento, atributos observados | `@Component`, `ngOnInit`, `ngOnChanges` | Standalone components; `input()` signal; `DestroyRef` |
+| `02-shadow-dom/` | Encapsulación de estilos y árbol DOM | `ViewEncapsulation.ShadowDom` | Sin cambios — la API es la misma |
+| `03-templates-slots/` | `<template>`, `<slot>` y proyección de contenido | `ng-content`, `ng-template` | `@defer` para bloques cargados lazy |
+| `04-es-modules/` | `import`/`export` nativos del navegador | Módulos Angular (`NgModule`) | Standalone + `@defer` eliminan la necesidad de `NgModule` |
 
 ## Cómo ejecutar
 

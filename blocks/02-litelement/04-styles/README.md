@@ -43,13 +43,14 @@ Lit usa `CSSStyleSheet` adoptados internamente. El resultado: los estilos se com
 
 ## Paralelo Angular
 
-| LitElement | Angular |
-|---|---|
-| `static styles = css\`...\`` | `styleUrls: ['./component.scss']` |
-| `:host` | `:host` en SCSS |
-| `:host([disabled])` | `@HostBinding('class.disabled')` + `:host(.disabled)` |
-| `var(--color, fallback)` | Variables SCSS `$color` (no atraviesan ViewEncap) |
-| `::slotted(*)` | No existe equivalente directo |
+| LitElement | Angular (clásico) | Angular v17+ |
+|---|---|---|
+| `static styles = css\`...\`` | `styleUrls: ['./component.scss']` | `styles` inline o `styleUrl` (singular) en standalone |
+| `:host` | `:host` en SCSS | Sin cambios |
+| `:host([disabled])` | `@HostBinding('class.disabled')` + `:host(.disabled)` | `host: { '[class.disabled]': 'disabled()' }` con signal |
+| `var(--color, fallback)` | Variables SCSS `$color` (no atraviesan ViewEncap) | CSS custom properties siguen siendo el mecanismo cross-component |
+| Herencia de estilos con array | Mixins SCSS | Sin cambios en Angular para este caso |
+| `::slotted(*)` | No existe equivalente directo | Sin cambios |
 
 ## Ejercicio
 

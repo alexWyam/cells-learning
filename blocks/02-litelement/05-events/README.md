@@ -45,12 +45,13 @@ _onScroll(e) { ... }
 
 ## Paralelo Angular
 
-| LitElement | Angular |
-|---|---|
-| `@click=${this.fn}` | `(click)="fn()"` |
-| `this.dispatchEvent(new CustomEvent('foo'))` | `@Output() foo = new EventEmitter(); foo.emit(val)` |
-| `bubbles: true, composed: true` | `EventEmitter` burbujea por defecto en Angular |
-| `detail` del CustomEvent | Valor pasado a `emit(val)` |
+| LitElement | Angular (clásico) | Angular v17+ |
+|---|---|---|
+| `@click=${this.fn}` | `(click)="fn()"` | Sin cambios |
+| `this.dispatchEvent(new CustomEvent('foo'))` | `@Output() foo = new EventEmitter(); foo.emit(val)` | `foo = output<T>()` + `this.foo.emit(val)` — sin `EventEmitter` |
+| `bubbles: true, composed: true` | `EventEmitter` burbujea por defecto en Angular | Sin cambios — `output()` sigue el mismo modelo |
+| `detail` del CustomEvent | Valor pasado a `emit(val)` | Tipo inferido del genérico `output<T>()` |
+| Comunicación padre → hijo vía propiedad | `@Input()` | `input()` signal — el padre pasa valor, el hijo lo lee como signal |
 
 ## Ejercicio
 

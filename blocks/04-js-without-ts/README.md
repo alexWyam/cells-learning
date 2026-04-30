@@ -10,11 +10,11 @@ El stack Cells trabaja en JavaScript puro. La seguridad de tipos viene de JSDoc 
 
 ## Ejercicios
 
-| Carpeta | Concepto clave | Paralelo TypeScript/Angular |
-|---|---|---|
-| `01-jsdoc/` | `@param`, `@returns`, `@typedef`, `@type`, `@template` | Tipos TypeScript, interfaces |
-| `02-eslint/` | Flat config, reglas personalizadas, plugins | `tsconfig.json` strict mode |
-| `03-testing/` | Vitest + happy-dom, patrones de test para Web Components | Jest + Testing Library |
+| Carpeta | Concepto clave | Paralelo TypeScript/Angular (clásico) | Angular v17+ / TS moderno |
+|---|---|---|---|
+| `01-jsdoc/` | `@param`, `@returns`, `@typedef`, `@type`, `@template` | Tipos TypeScript, interfaces | Sin cambios — JSDoc sigue siendo la alternativa para JS puro |
+| `02-eslint/` | Flat config, reglas personalizadas, plugins | `tsconfig.json` strict mode | Angular ESLint actualizado para flat config; reglas para signals disponibles |
+| `03-testing/` | Vitest + happy-dom, patrones de test para Web Components | Jest + Testing Library | Angular Testing con `TestBed` soporta signals; `ComponentFixture` se puede reemplazar por `render` de `@testing-library/angular` |
 
 ## Referencia
 

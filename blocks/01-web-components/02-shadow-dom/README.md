@@ -14,12 +14,12 @@ Añadir encapsulación real de DOM y estilos al componente del ejercicio anterio
 
 ## Paralelo Angular
 
-| Web Components | Angular |
-|---|---|
-| `attachShadow({ mode: 'open' })` | `ViewEncapsulation.ShadowDom` |
-| `:host` selector | `:host` en SCSS de componente |
-| Variables CSS atraviesan el Shadow DOM | Variables CSS globales en Angular |
-| Estilos completamente encapsulados | `ViewEncapsulation.Emulated` solo los emula |
+| Web Components | Angular (clásico) | Angular v17+ |
+|---|---|---|
+| `attachShadow({ mode: 'open' })` | `ViewEncapsulation.ShadowDom` | Sin cambios — la API de encapsulación es la misma |
+| `:host` selector | `:host` en SCSS de componente | Sin cambios |
+| Variables CSS atraviesan el Shadow DOM | Variables CSS globales en Angular | Sin cambios — CSS variables siguen siendo el mecanismo |
+| Estilos completamente encapsulados | `ViewEncapsulation.Emulated` solo los emula | Sin cambios — `ShadowDom` sigue siendo la encapsulación real |
 
 ## Ejercicio
 

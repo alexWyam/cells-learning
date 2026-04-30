@@ -43,12 +43,12 @@ my-cells-app/
 
 ## Paralelo Angular
 
-| Cells | Angular CLI |
-|---|---|
-| `components/my-button/my-button.js` | `src/app/my-button/my-button.component.ts` |
-| `pages/home/home-page.js` | `src/app/home/home.component.ts` (ruta lazy) |
-| `cells.config.js` | `angular.json` |
-| `app/app.js` | `src/app/app.module.ts` + `app-routing.module.ts` |
+| Cells | Angular (clásico) | Angular v17+ |
+|---|---|---|
+| `components/my-button/my-button.js` | `src/app/my-button/my-button.component.ts` + declarado en `NgModule` | Standalone component — se importa directamente donde se usa |
+| `pages/home/home-page.js` | `src/app/home/home.component.ts` (ruta lazy con `NgModule`) | `loadComponent: () => import('./home/home-page')` en el array de rutas |
+| `cells.config.js` | `angular.json` | `angular.json` sigue siendo el archivo de configuración |
+| `app/app.js` | `src/app/app.module.ts` + `app-routing.module.ts` | `main.ts` con `bootstrapApplication(AppComponent, { providers: [provideRouter(routes)] })` |
 
 ## Ejercicio
 

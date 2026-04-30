@@ -41,12 +41,13 @@ updated(changed) {
 
 ## Paralelo Angular
 
-| LitElement | Angular |
-|---|---|
-| `static properties = { name: { type: String } }` | `@Input() name: string` |
-| `reflect: true` | `@HostBinding('attr.active')` |
-| `state: true` | Propiedad privada del componente |
-| `updated(changedProps)` | `ngOnChanges(changes: SimpleChanges)` |
+| LitElement | Angular (clásico) | Angular v17+ |
+|---|---|---|
+| `static properties = { name: { type: String } }` | `@Input() name: string` | `name = input<string>()` — signal-based, sin decorador de clase |
+| `reflect: true` | `@HostBinding('attr.active')` | `host: { '[attr.active]': 'active()' }` en metadata del componente |
+| `state: true` | Propiedad privada del componente | `myState = signal<T>(initialValue)` — state reactivo sin detección de cambios manual |
+| `updated(changedProps)` | `ngOnChanges(changes: SimpleChanges)` | `effect(() => { console.log(this.name()) })` — reacciona a signals automáticamente |
+| Prop computada a partir de otras | getter JS | `computed(() => this.a() + this.b())` — memoizado y reactivo |
 
 ## Ejercicio
 
