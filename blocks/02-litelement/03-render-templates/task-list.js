@@ -11,16 +11,61 @@ class TaskList extends LitElement {
   };
 
   static styles = css`
-    :host { display: block; max-width: 480px; }
-    ul { list-style: none; padding: 0; }
-    li { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-bottom: 1px solid #eee; }
-    li.done { opacity: 0.5; text-decoration: line-through; }
-    .filters { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
-    .filters button { padding: 0.25rem 0.75rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; background: #fff; }
-    .filters button.active { background: #6c63ff; color: #fff; border-color: #6c63ff; }
-    .add-form { display: flex; gap: 0.5rem; margin-top: 1rem; }
-    .add-form input { flex: 1; padding: 0.4rem; border: 1px solid #ddd; border-radius: 4px; }
-    .add-form button { padding: 0.4rem 1rem; background: #6c63ff; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    :host {
+      display: block;
+      max-width: 480px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border-bottom: 1px solid #eee;
+    }
+    li.done {
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .filters button {
+      padding: 0.25rem 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #fff;
+    }
+    .filters button.active {
+      background: #6c63ff;
+      color: #fff;
+      border-color: #6c63ff;
+    }
+    .add-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .add-form input {
+      flex: 1;
+      padding: 0.4rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .add-form button {
+      padding: 0.4rem 1rem;
+      background: #6c63ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   `;
 
   constructor() {
@@ -36,19 +81,20 @@ class TaskList extends LitElement {
   }
 
   get filteredTasks() {
-    // TODO: filtrar this.tasks según this.filter ('all', 'pending', 'done')
+    if (this.filter === 'pending') return this.tasks.filter((t) => !t.done);
+    if (this.filter === 'done') return this.tasks.filter((t) => t.done);
     return this.tasks;
   }
 
   addTask() {
-    // TODO: crear nueva tarea con id único y añadirla a this.tasks
-    // Importante: this.tasks = [...this.tasks, newTask] para disparar render
+    const text = this._newTaskText.trim();
+    if (!text) return;
+    this.tasks = [...this.tasks, { id: Date.now(), text, done: false }];
     this._newTaskText = '';
   }
 
-  toggleTask(_id) {
-    // TODO: invertir el estado done de la tarea con el id dado
-    // Importante: crear nuevo array para disparar render
+  toggleTask(id) {
+    this.tasks = this.tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t));
   }
 
   render() {
@@ -66,28 +112,30 @@ class TaskList extends LitElement {
         )}
       </div>
 
-      ${when(
-        this.filteredTasks.length === 0,
-        () => html`<p>No hay tareas.</p>`,
-        () => html`
-          <ul>
-            ${repeat(
-              this.filteredTasks,
-              (task) => task.id,
-              (task) => html`
-                <li class=${classMap({ done: task.done })}>
-                  <input
-                    type="checkbox"
-                    .checked=${task.done}
-                    @change=${() => this.toggleTask(task.id)}
-                  />
-                  ${task.text}
-                </li>
-              `
-            )}
-          </ul>
-        `
-      )}
+      <div class="task-list-body">
+        ${when(
+          this.filteredTasks.length === 0,
+          () => html`<p>No hay tareas.</p>`,
+          () => html`
+            <ul>
+              ${repeat(
+                this.filteredTasks,
+                (task) => task.id,
+                (task) => html`
+                  <li class=${classMap({ done: task.done })}>
+                    <input
+                      type="checkbox"
+                      .checked=${task.done}
+                      @change=${() => this.toggleTask(task.id)}
+                    />
+                    ${task.text}
+                  </li>
+                `
+              )}
+            </ul>
+          `
+        )}
+      </div>
 
       <div class="add-form">
         <input
