@@ -77,14 +77,14 @@ describe('my-lit-component', () => {
 
 ## Paralelo Angular Testing
 
-| Vitest + happy-dom | Angular TestBed |
-|---|---|
-| `document.createElement('my-comp')` | `TestBed.createComponent(MyComp)` |
-| `el.property = value` | `fixture.componentInstance.property = value` |
-| `await el.updateComplete` | `fixture.detectChanges()` |
-| `el.shadowRoot.querySelector(...)` | `fixture.debugElement.query(By.css(...))` |
-| `vi.fn()` | `jasmine.createSpy()` |
-| `vi.spyOn(obj, 'method')` | `spyOn(obj, 'method')` |
+| Vitest + happy-dom | Angular TestBed (clásico) | Angular v17+ |
+|---|---|---|
+| `document.createElement('my-comp')` | `TestBed.createComponent(MyComp)` | Sin cambios; `TestBed.configureTestingModule` acepta standalone components directamente en `imports` |
+| `el.property = value` | `fixture.componentInstance.property = value` | `fixture.componentRef.setInput('name', value)` para inputs signal-based |
+| `await el.updateComplete` | `fixture.detectChanges()` | Sin cambios; `fixture.autoDetectChanges()` disponible |
+| `el.shadowRoot.querySelector(...)` | `fixture.debugElement.query(By.css(...))` | Sin cambios; también `@testing-library/angular` como alternativa |
+| `vi.fn()` | `jasmine.createSpy()` | Sin cambios; Jest/Vitest `vi.fn()` sigue siendo el equivalente |
+| `vi.spyOn(obj, 'method')` | `spyOn(obj, 'method')` | Sin cambios |
 
 ## Ejercicio
 

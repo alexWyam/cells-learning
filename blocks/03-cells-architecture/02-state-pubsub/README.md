@@ -46,12 +46,13 @@ Canal 'user-update'    ← publica el cambio
 
 ## Paralelo Angular
 
-| Cells Pub-Sub | Angular |
-|---|---|
-| Canal + `publish` | `BehaviorSubject` + `next()` en un servicio |
-| `subscribe` en componente | `ngOnInit` con `.subscribe()` |
-| `unsubscribe` en `disconnectedCallback` | `ngOnDestroy` + `takeUntilDestroyed()` |
-| Bridge component | Componente contenedor ("smart component") |
+| Cells Pub-Sub | Angular (clásico) | Angular v17+ |
+|---|---|---|
+| Canal + `publish` | `BehaviorSubject` + `next()` en un servicio | `signal()` en un servicio inyectable para estado local; `BehaviorSubject` sigue válido |
+| `subscribe` en componente | `ngOnInit` con `.subscribe()` | `toSignal(obs$)` — convierte Observable a signal y gestiona la suscripción automáticamente |
+| `unsubscribe` en `disconnectedCallback` | `ngOnDestroy` + `takeUntilDestroyed()` | `takeUntilDestroyed(this.destroyRef)` — cleanup automático sin `ngOnDestroy` |
+| Bridge component | Componente contenedor ("smart component") | Smart component standalone; puede usar `inject()` directamente sin constructor |
+| Datos derivados del canal | `combineLatest` + `async` pipe | `computed(() => this.cartSignal())` — derivación reactiva sin RxJS para estado simple |
 
 ## Ejercicio
 

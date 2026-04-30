@@ -20,17 +20,17 @@ Lit solo actualiza los nodos que cambian entre renders, no regenera el DOM compl
 
 ### Directivas principales
 
-| Directiva | Uso | Equivalente Angular |
+| Directiva Lit | Equivalente Angular (clásico) | Angular v17+ |
 |---|---|---|
-| `repeat(items, keyFn, templateFn)` | Listas con clave estable | `*ngFor="let x of xs; trackBy: fn"` |
-| `when(condition, trueFn, falseFn)` | Condicional | `*ngIf` con `else` |
-| `choose(value, cases)` | Switch | `ngSwitch` |
-| `classMap({ active: bool })` | Clases dinámicas | `[class.active]="bool"` |
-| `styleMap({ color: val })` | Estilos dinámicos | `[style.color]="val"` |
-| `ifDefined(value)` | Omite atributo si `undefined` | `[attr.foo]="val ?? null"` |
-| `live(value)` | Fuerza binding en inputs | Necesario con formularios controlados |
-| `ref(callback)` | Referencia a elemento del DOM | `@ViewChild` |
-| `unsafeHTML(str)` | HTML en string (peligroso) | `[innerHTML]="str"` |
+| `repeat(items, keyFn, templateFn)` | `*ngFor="let x of xs; trackBy: fn"` | `@for (x of xs; track x.id) { ... }` — `track` obligatorio |
+| `when(condition, trueFn, falseFn)` | `*ngIf` con `else` | `@if (cond) { ... } @else { ... }` |
+| `choose(value, cases)` | `ngSwitch` / `*ngSwitchCase` | `@switch (val) { @case ('a') { ... } }` |
+| `classMap({ active: bool })` | `[class.active]="bool"` | Sin cambios |
+| `styleMap({ color: val })` | `[style.color]="val"` | Sin cambios |
+| `ifDefined(value)` | `[attr.foo]="val ?? null"` | Sin cambios |
+| `live(value)` | Necesario con formularios controlados | Sin cambios |
+| `ref(callback)` | `@ViewChild` | `viewChild('ref')` — signal-based, sin decorador |
+| `unsafeHTML(str)` | `[innerHTML]="str"` | Sin cambios |
 
 ## Ejercicio
 
