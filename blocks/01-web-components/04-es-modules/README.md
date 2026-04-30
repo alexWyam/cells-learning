@@ -15,13 +15,13 @@ Organizar el código en módulos ES nativos del navegador: `import`/`export`, im
 
 ## Paralelo Angular
 
-| ES Modules nativos | Angular / TypeScript |
-|---|---|
-| `export class Foo {}` | `export class FooComponent {}` + `declarations` |
-| `import { Foo } from './foo.js'` | `import { FooComponent } from './foo.component'` |
-| Import map para `lit` | `tsconfig.json` paths + webpack |
-| `import()` dinámico | Lazy loading de módulos Angular |
-| Sin sistema de módulos adicional | `NgModule` como capa organizativa |
+| ES Modules nativos | Angular (clásico) | Angular v17+ |
+|---|---|---|
+| `export class Foo {}` | `export class FooComponent {}` + `NgModule.declarations` | Standalone: se importa directamente en `imports: [FooComponent]` |
+| `import { Foo } from './foo.js'` | `import { FooComponent } from './foo.component'` | Sin cambios |
+| Import map para `lit` | `tsconfig.json` paths + webpack | `tsconfig.json` paths + Vite/esbuild |
+| `import()` dinámico | Lazy loading con `loadChildren` / `loadComponent` | `@defer { <comp /> }` para diferir en el template; `loadComponent` para rutas |
+| Sin sistema de módulos adicional | `NgModule` como capa organizativa | `NgModule` opcional — standalone es el default en v17+ |
 
 ## Ejercicio
 

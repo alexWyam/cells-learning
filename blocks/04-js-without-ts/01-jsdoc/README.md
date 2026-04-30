@@ -41,14 +41,14 @@ const first = (arr) => arr[0];
 
 ## Paralelo TypeScript
 
-| JSDoc | TypeScript |
-|---|---|
-| `@param {string} name` | `name: string` en la firma |
-| `@returns {User}` | `: User` en la firma |
-| `@typedef {Object} User` | `interface User {}` o `type User = {}` |
-| `@type {string[]}` | `const arr: string[] = []` |
-| `@template T` | `<T>` en función genérica |
-| `// @ts-check` en la cabecera | tsconfig strict mode |
+| JSDoc | TypeScript (clásico) | TypeScript / Angular v17+ |
+|---|---|---|
+| `@param {string} name` | `name: string` en la firma | Sin cambios |
+| `@returns {User}` | `: User` en la firma | Sin cambios |
+| `@typedef {Object} User` | `interface User {}` o `type User = {}` | Sin cambios |
+| `@type {string[]}` | `const arr: string[] = []` | Sin cambios |
+| `@template T` | `<T>` en función genérica | Sin cambios |
+| `// @ts-check` en la cabecera | `tsconfig.json` strict mode | Angular v17+ requiere TS 5.x — mayor inferencia de tipos; decoradores de señales (`input()`, `output()`) son funciones, no decoradores de clase |
 
 ## Activar comprobación de tipos en VSCode
 

@@ -40,13 +40,13 @@ router.navigate('/detail/42');
 
 ## Paralelo Angular
 
-| Cells Router | Angular Router |
-|---|---|
-| `router.addRoutes([{ path, page }])` | `RouterModule.forRoot(routes)` |
-| `page: 'my-page'` | `component: MyComponent` |
-| `params.id` | `ActivatedRoute.snapshot.params['id']` |
-| `router.navigate('/path')` | `Router.navigate(['/path'])` |
-| `<cells-template>` | `<router-outlet>` |
+| Cells Router | Angular Router (clásico) | Angular v17+ |
+|---|---|---|
+| `router.addRoutes([{ path, page }])` | `RouterModule.forRoot(routes)` | `provideRouter(routes)` en `bootstrapApplication` — sin `RouterModule` |
+| `page: 'my-page'` | `component: MyComponent` | `loadComponent: () => import('./my-page')` — lazy por defecto |
+| `params.id` | `ActivatedRoute.snapshot.params['id']` | `inject(ActivatedRoute).snapshot.params['id']` o `input()` con `withComponentInputBinding()` |
+| `router.navigate('/path')` | `Router.navigate(['/path'])` | `inject(Router).navigate(['/path'])` — `inject()` en vez de constructor |
+| `<cells-template>` | `<router-outlet>` | Sin cambios |
 
 ## Requisitos
 

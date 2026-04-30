@@ -46,12 +46,12 @@ cells build
 
 ## Paralelo Angular CLI
 
-| cells-cli | Angular CLI |
-|---|---|
-| `cells new my-app` | `ng new my-app` |
-| `cells generate my-comp` | `ng generate component my-comp` |
-| `cells serve` | `ng serve` |
-| `cells build` | `ng build` |
+| cells-cli | Angular CLI (clásico) | Angular CLI v17+ |
+|---|---|---|
+| `cells new my-app` | `ng new my-app` (genera `NgModule`) | `ng new my-app` genera standalone por defecto (sin `NgModule`) |
+| `cells generate my-comp` | `ng generate component my-comp` | `ng g c my-comp` genera standalone component por defecto |
+| `cells serve` | `ng serve` | Sin cambios; usa esbuild por defecto (`--builder @angular-devkit/build-angular:browser-esbuild`) |
+| `cells build` | `ng build` | Sin cambios; esbuild produce bundles más pequeños y rápidos |
 
 ## Ejercicio
 

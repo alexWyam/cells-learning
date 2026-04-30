@@ -15,13 +15,14 @@ Usar `<template>` para definir markup reutilizable sin renderizado inmediato y `
 
 ## Paralelo Angular
 
-| Web Components | Angular |
-|---|---|
-| `<template>` | `<ng-template>` |
-| `template.content.cloneNode(true)` | `ViewContainerRef.createEmbeddedView(templateRef)` |
-| `<slot>` | `<ng-content>` |
-| `<slot name="header">` | `<ng-content select="[header]">` |
-| `::slotted(p)` | No existe equivalente directo |
+| Web Components | Angular (clásico) | Angular v17+ |
+|---|---|---|
+| `<template>` | `<ng-template>` | Sin cambios |
+| `template.content.cloneNode(true)` | `ViewContainerRef.createEmbeddedView(templateRef)` | Sin cambios |
+| `<slot>` | `<ng-content>` | Sin cambios |
+| `<slot name="header">` | `<ng-content select="[header]">` | Sin cambios |
+| Carga dinámica del template | Lazy loading con `NgModule` | `@defer { <comp /> }` — carga diferida declarativa sin código extra |
+| `::slotted(p)` | No existe equivalente directo | Sin cambios |
 
 ## Ejercicio
 

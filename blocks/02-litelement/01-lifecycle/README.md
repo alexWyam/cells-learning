@@ -29,14 +29,14 @@ disconnectedCallback()            ← elemento eliminado del DOM
 
 ## Paralelo Angular
 
-| LitElement | Angular |
-|---|---|
-| `constructor` | `constructor` |
-| `connectedCallback` | `ngOnInit` |
-| `disconnectedCallback` | `ngOnDestroy` |
-| `firstUpdated` | `ngAfterViewInit` |
-| `updated` | `ngAfterViewChecked` |
-| `await el.updateComplete` | `fixture.detectChanges()` |
+| LitElement | Angular (clásico) | Angular v17+ |
+|---|---|---|
+| `constructor` | `constructor` | Sin cambios |
+| `connectedCallback` | `ngOnInit` | Sin cambios; también `inject(DestroyRef)` para setup/teardown |
+| `disconnectedCallback` | `ngOnDestroy` | `DestroyRef.onDestroy(fn)` — registra cleanup sin implementar la interfaz |
+| `firstUpdated` | `ngAfterViewInit` | `afterNextRender(() => { ... })` — equivalente funcional, sin ciclo de vida de clase |
+| `updated` | `ngAfterViewChecked` | `effect(() => { ... })` cuando el cambio reacciona a signals |
+| `await el.updateComplete` | `fixture.detectChanges()` | Sin cambios en tests |
 
 ## Ejercicio
 

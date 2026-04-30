@@ -10,13 +10,13 @@ Todos los componentes de Cells están construidos con LitElement. Este bloque es
 
 ## Ejercicios
 
-| Carpeta | Concepto clave | Paralelo Angular |
-|---|---|---|
-| `01-lifecycle/` | `connectedCallback`, `disconnectedCallback`, `updated`, `firstUpdated` | `ngOnInit`, `ngOnDestroy`, `ngAfterViewInit` |
-| `02-reactive-properties/` | `static properties`, actualizaciones automáticas del DOM | `@Input()`, detección de cambios |
-| `03-render-templates/` | `render()`, directivas `repeat`, `when`, `classMap` | Template syntax Angular, `*ngFor`, `*ngIf` |
-| `04-styles/` | `static styles = css\`...\``, variables CSS, theming | `styleUrls`, CSS custom properties |
-| `05-events/` | `CustomEvent`, `@eventOptions`, pattern de comunicación padre-hijo | `@Output()`, `EventEmitter` |
+| Carpeta | Concepto clave | Paralelo Angular (clásico) | Angular v17+ |
+|---|---|---|---|
+| `01-lifecycle/` | `connectedCallback`, `disconnectedCallback`, `updated`, `firstUpdated` | `ngOnInit`, `ngOnDestroy`, `ngAfterViewInit` | `DestroyRef`; `afterNextRender()` reemplaza `ngAfterViewInit` en muchos casos |
+| `02-reactive-properties/` | `static properties`, actualizaciones automáticas del DOM | `@Input()`, detección de cambios | `input()` signal — detección de cambios automática y sin `ChangeDetectorRef` |
+| `03-render-templates/` | `render()`, directivas `repeat`, `when`, `classMap` | Template syntax Angular, `*ngFor`, `*ngIf` | `@for ... track`, `@if / @else`, `@switch / @case` |
+| `04-styles/` | `static styles = css\`...\``, variables CSS, theming | `styleUrls`, CSS custom properties | Sin cambios de API — CSS custom properties siguen siendo el mecanismo |
+| `05-events/` | `CustomEvent`, `@eventOptions`, pattern de comunicación padre-hijo | `@Output()`, `EventEmitter` | `output()` — nuevo decorador signal-based; sin `EventEmitter` |
 
 ## Instalación de LitElement
 

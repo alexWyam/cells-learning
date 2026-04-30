@@ -14,13 +14,13 @@ Crear un elemento HTML personalizado desde cero, entender su ciclo de vida y la 
 
 ## Paralelo Angular
 
-| Web Components | Angular |
-|---|---|
-| `class extends HTMLElement` | `@Component({ ... })` |
-| `connectedCallback` | `ngOnInit` |
-| `disconnectedCallback` | `ngOnDestroy` |
-| `attributeChangedCallback` | `ngOnChanges` |
-| `customElements.define(...)` | Declaración en `NgModule.declarations` |
+| Web Components | Angular (clásico) | Angular v17+ |
+|---|---|---|
+| `class extends HTMLElement` | `@Component({ ... })` + `NgModule` | Standalone component (`standalone: true` por defecto) |
+| `connectedCallback` | `ngOnInit` | `ngOnInit` (sin cambios) |
+| `disconnectedCallback` | `ngOnDestroy` | `DestroyRef` + `takeUntilDestroyed()` |
+| `attributeChangedCallback` | `ngOnChanges` | `input()` signal — reacciona automáticamente a cambios |
+| `customElements.define(...)` | Declaración en `NgModule.declarations` | `imports: [MyComp]` directo en el consumidor |
 
 ## Ejercicio
 
