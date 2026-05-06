@@ -10,3 +10,13 @@
   --ds-spacing: 0.75rem;
   --ds-font-size: 0.9rem;
 }
+
+/* Tema oscuro */
+.dark-theme {
+  --ds-color-primary: #a78bfa;
+  --ds-color-secondary: #9ca3af;
+  --ds-color-danger: #fc8181;
+  --ds-color-bg: #121212;
+  --ds-color-text: #e0e0e0;
+  --ds-color-border: #424242;
+}

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -14,9 +14,19 @@
     </script>
     <link rel="stylesheet" href="./ds-tokens.css" />
     <style>
-      body { font-family: system-ui, sans-serif; padding: 2rem; }
-      .dark { background: #1a1a2e; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; }
-      .dark { --ds-color-primary: #bb86fc; --ds-color-bg: #16213e; --ds-color-text: #e0e0e0; }
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 2rem;
+      }
+      .dark {
+        background: var(--ds-color-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-top: 2rem;
+      }
+      .dark h2 {
+        color: var(--ds-color-text);
+      }
     </style>
   </head>
   <body>
@@ -34,8 +44,8 @@
       <ds-button slot="footer" variant="primary">Acción</ds-button>
     </ds-card>
 
-    <div class="dark">
-      <h2 style="color: #e0e0e0">Tema oscuro (variables CSS)</h2>
+    <div class="dark dark-theme">
+      <h2>Tema oscuro (variables CSS)</h2>
       <ds-button variant="primary">Primary Dark</ds-button>
       <ds-card>
         <span slot="header">Tarjeta oscura</span>

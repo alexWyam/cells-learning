@@ -7,8 +7,13 @@ class DsButton extends LitElement {
   };
 
   static styles = css`
-    :host { display: inline-block; }
-    :host([disabled]) { opacity: 0.5; pointer-events: none; }
+    :host {
+      display: inline-block;
+    }
+    :host([disabled]) {
+      opacity: 0.5;
+      pointer-events: none;
+    }
     button {
       padding: var(--ds-spacing, 0.75rem) calc(var(--ds-spacing, 0.75rem) * 1.5);
       border: none;
@@ -19,9 +24,18 @@ class DsButton extends LitElement {
       color: #fff;
       transition: filter 0.15s;
     }
-    button:hover { filter: brightness(1.1); }
-
-    /* TODO: añadir variantes primary y danger usando :host([variant="..."]) */
+    button:hover {
+      filter: brightness(1.1);
+    }
+    :host([variant='primary']) button {
+      background: var(--ds-color-primary, #6200ea);
+    }
+    :host([variant='secondary']) button {
+      background: var(--ds-color-secondary, #546e7a);
+    }
+    :host([variant='danger']) button {
+      background: var(--ds-color-danger, #e53935);
+    }
   `;
 
   constructor() {
