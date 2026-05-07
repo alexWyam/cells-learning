@@ -15,7 +15,10 @@ class RatingStars extends LitElement {
   };
 
   static styles = css`
-    :host { display: inline-flex; gap: 4px; }
+    :host {
+      display: inline-flex;
+      gap: 4px;
+    }
     button {
       background: none;
       border: none;
@@ -25,7 +28,9 @@ class RatingStars extends LitElement {
       line-height: 1;
       transition: transform 0.1s;
     }
-    button:hover { transform: scale(1.2); }
+    button:hover {
+      transform: scale(1.2);
+    }
   `;
 
   constructor() {
@@ -37,7 +42,13 @@ class RatingStars extends LitElement {
 
   _select(rating) {
     this.value = rating;
-    // TODO: emitir CustomEvent 'rating-change' con { detail: { rating }, bubbles: true, composed: true }
+    this.dispatchEvent(
+      new CustomEvent('rating-change', {
+        detail: { rating },
+        bubbles: true,
+        composed: true,
+      })
+    );
   }
 
   render() {

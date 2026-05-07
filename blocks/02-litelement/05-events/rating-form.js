@@ -7,10 +7,28 @@ class RatingForm extends LitElement {
   };
 
   static styles = css`
-    :host { display: block; max-width: 360px; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; }
-    p { margin: 0.5rem 0; }
-    button { margin-top: 1rem; padding: 0.5rem 1.25rem; background: #6c63ff; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
-    button:disabled { opacity: 0.5; }
+    :host {
+      display: block;
+      max-width: 360px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    p {
+      margin: 0.5rem 0;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1.25rem;
+      background: #6c63ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: 0.5;
+    }
   `;
 
   constructor() {
@@ -19,8 +37,8 @@ class RatingForm extends LitElement {
     this._submitted = false;
   }
 
-  _onRatingChange(_e) {
-    // TODO: extraer e.detail.rating y asignarlo a this._rating
+  _onRatingChange(e) {
+    this._rating = e.detail.rating;
   }
 
   _submit() {
